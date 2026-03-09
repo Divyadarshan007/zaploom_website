@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: 'Matter Mono-TRIAL';
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translate(0);
+  }
+
+  100% {
+    transform: translate(-33%);
+  }
+}
+
+.strip-left {
+  display: flex;
+  gap: 80px;
+  width: max-content;
+  animation: scroll-left 15s linear infinite;
+}
+
+.strip-left:hover {
+  animation-play-state: paused;
+}
+
+.font-clash-display {
+  font-family: 'Clash Display';
+}
+
+.bg-grid {
+  background-size: 50px 50px;
+  background-image:
+    linear-gradient(to right, #f3f4f6 1.5px, transparent 1.5px),
+    linear-gradient(to bottom, #f3f4f6 1.5px, transparent 1.5px);
+}
+
+.bg-ticker-gradient {
+  background: radial-gradient(circle at center, #111 0%, #050505 100%);
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float 8s ease-in-out infinite;
+  animation-delay: 2s;
+}
+
+@keyframes ticker {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-ticker {
+  animation: ticker 30s linear infinite;
+}
+
+
+
+.bg-grid {
+  background-image: url('/images/Bg2.png');
+  min-height: 100vh;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
