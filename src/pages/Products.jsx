@@ -1,69 +1,12 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Testimonial from "./Testimonial";
+import { products } from "../data/products";
 
 const Products = () => {
     const [openFaq, setOpenFaq] = useState(null);
-
-    const products = [
-        {
-            title: "Multivendor Grocery Solution",
-            description:
-                "Launch your own multi-vendor grocery marketplace with our fully customizable solution. Features include vendor management, real-time inventory tracking, delivery logistics, and a seamless customer ordering experience across web and mobile platforms.",
-            image: "/images/productImage/bdea.png",
-            alt: "Multivendor Grocery Solution",
-        },
-        {
-            title: "Single Vendor Grocery Solution",
-            description:
-                "Perfect for independent grocery stores looking to go digital. This solution offers a streamlined ordering system, smart inventory management, customer loyalty programs, and integrated delivery tracking — all under your own brand.",
-            image: "/images/productImage/True_Bite_App.png",
-            alt: "Single Vendor Grocery Solution",
-        },
-        {
-            title: "Food Delivery System",
-            description:
-                "A robust food delivery platform featuring real-time order tracking, restaurant management dashboard, delivery partner app, dynamic pricing, and AI-powered recommendations to boost order frequency and customer retention.",
-            image: "/images/productImage/PranSpandan.png",
-            alt: "Food Delivery System",
-        },
-        {
-            title: "Restaurant Ordering System",
-            description:
-                "Digitize your restaurant operations with our comprehensive ordering system. Includes table management, QR-based menu ordering, kitchen display system, payment integration, and analytics dashboard for better business insights.",
-            image: "/images/productImage/nursing.png",
-            alt: "Restaurant Ordering System",
-        },
-        {
-            title: "On-Demand Services System",
-            description:
-                "Build your own on-demand services marketplace — from home services to beauty and wellness. Features include service provider management, real-time booking, in-app payments, ratings & reviews, and automated scheduling.",
-            image: "/images/productImage/vending.png",
-            alt: "On-Demand Services System",
-        },
-        {
-            title: "Ride Sharing Complete System",
-            description:
-                "A complete ride-hailing solution with passenger app, driver app, and admin panel. Includes real-time GPS tracking, fare estimation, surge pricing, trip history, and comprehensive analytics for fleet management.",
-            image: "/images/productImage/ciplperfume.png",
-            alt: "Ride Sharing Complete System",
-        },
-        {
-            title: "MultiShop eCommerce System",
-            description:
-                "Power your multi-vendor eCommerce platform with features like vendor storefronts, product catalog management, order processing, payment gateway integration, shipping logistics, and customer engagement tools.",
-            image: "/images/productImage/bdea.png",
-            alt: "MultiShop eCommerce System",
-        },
-        {
-            title: "Pharmacy Business Solution",
-            description:
-                "A complete pharmacy management system with prescription uploads, medicine search, inventory management, delivery tracking, and compliance management — making healthcare accessible to everyone.",
-            image: "/images/productImage/True_Bite_App.png",
-            alt: "Pharmacy Business Solution",
-        },
-    ];
 
     const testimonials = [
         {
@@ -182,7 +125,10 @@ const Products = () => {
                                     <p className="text-slate-500 leading-relaxed text-sm md:text-base">
                                         {product.description}
                                     </p>
-                                    <button className="inline-flex items-center gap-2 px-6 py-3 bg-slate-900 text-white text-sm font-medium rounded-full hover:bg-slate-800 transition-all duration-300 active:scale-95 group/btn">
+                                    <Link
+                                        to={`/products/${product.slug}`}
+                                        className="inline-flex items-center gap-2 px-6 py-3 bg-slate-900 text-white text-sm font-medium rounded-full hover:bg-slate-800 transition-all duration-300 active:scale-95 group/btn"
+                                    >
                                         Learn More
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
@@ -198,7 +144,7 @@ const Products = () => {
                                                 d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
                                             />
                                         </svg>
-                                    </button>
+                                    </Link>
                                 </div>
 
                                 {/* Image */}
