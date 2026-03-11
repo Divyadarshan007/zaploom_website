@@ -1,36 +1,30 @@
-import React, { useState } from 'react';
-
-const testimonialData = [
-    {
-        id: 1,
-        name: "Ajay Agarwal",
-        role: "AVEENA CO-FOUNDER",
-        videoUrl: "https://cdn.sanity.io/files/c0vwz9hn/production/c4eb4f1401603662ef2e72b2b7a54861afd1278e.mp4",
-    },
-    {
-        id: 2,
-        name: "Shriya Sadneni",
-        role: "MURZBAN",
-        videoUrl: "https://cdn.sanity.io/files/c0vwz9hn/production/4de1b241798fb444655b782a5c4468bbaa868845.mp4",
-    },
-    {
-        id: 3,
-        name: "Muktesh Narula",
-        role: "DOVESOFT",
-        videoUrl: "https://cdn.sanity.io/files/c0vwz9hn/production/af4e8a23683d87cfdfab5dd361810d092af5f1e8.mp4",
-    },
-    {
-        id: 4,
-        name: "Yash Goswami",
-        role: "BITEBEE FOUNDER",
-        videoUrl: "https://cdn.sanity.io/files/c0vwz9hn/production/7e645973372eaaf4b6865d05a84bdef46208f935.mp4",
-    }
-];
+import React, { useState, useEffect } from 'react';
+import { commonAPI } from '../lib/api';
 
 const TestimonialSection = () => {
+    const [testimonials, setTestimonials] = useState([]);
     const [hoveredId, setHoveredId] = useState(null);
     const [pausedId, setPausedId] = useState(null);
     const [isMuted, setIsMuted] = useState(true);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchTestimonials = async () => {
+            try {
+                const res = await commonAPI.getTestimonials();
+                if (res.success) {
+                    setTestimonials(res.testimonials);
+                }
+            } catch (error) {
+                console.error("Failed to fetch testimonials", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchTestimonials();
+    }, []);
+
+    if (loading || testimonials.length === 0) return null;
 
     return (
         <section className="py-20 px-4 md:px-10 bg-white">
@@ -47,11 +41,11 @@ const TestimonialSection = () => {
 
                 {/* Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 w-full max-w-5xl">
-                    {testimonialData.map((item) => (
+                    {testimonials.map((item) => (
                         <div
-                            key={item.id}
+                            key={item._id}
                             onMouseEnter={() => {
-                                setHoveredId(item.id);
+                                setHoveredId(item._id);
                                 setPausedId(null);
                             }}
                             onMouseLeave={() => setHoveredId(null)}
@@ -72,7 +66,7 @@ const TestimonialSection = () => {
                                 playsInline
                                 ref={(el) => {
                                     if (el) {
-                                        if (hoveredId === item.id && pausedId !== item.id) {
+                                        if (hoveredId === item._id && pausedId !== item._id) {
                                             el.play().catch(() => { });
                                         } else {
                                             el.pause();
@@ -90,11 +84,11 @@ const TestimonialSection = () => {
                                 <button
                                     onClick={(e) => {
                                         e.stopPropagation();
-                                        setPausedId(pausedId === item.id ? null : item.id);
+                                        setPausedId(pausedId === item._id ? null : item._id);
                                     }}
                                     className="p-2 bg-white/20 backdrop-blur-md rounded-full hover:bg-white/40 transition-colors"
                                 >
-                                    {hoveredId === item.id && pausedId !== item.id ? (
+                                    {hoveredId === item._id && pausedId !== item._id ? (
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
                                             <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 002 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
                                         </svg>
@@ -128,7 +122,7 @@ const TestimonialSection = () => {
                             {/* Text content */}
                             <div className="absolute bottom-8 left-8 right-8 text-white z-30">
                                 <h3 className="text-xl font-bold mb-1">{item.name}</h3>
-                                <p className="text-xs font-semibold opacity-80 tracking-widest uppercase">{item.role}</p>
+                                <p className="text-xs font-semibold opacity-80 tracking-widest uppercase">{item.position || item.role}</p>
                             </div>
                         </div>
                     ))}

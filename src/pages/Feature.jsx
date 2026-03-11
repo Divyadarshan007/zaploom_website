@@ -1,5 +1,25 @@
+import { useState, useEffect } from "react";
+import { commonAPI } from "../lib/api";
+
 const Feature = () => {
-    const features = [
+    const [settings, setSettings] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchSettings = async () => {
+            try {
+                const res = await commonAPI.getHomeSettings();
+                if (res.success) setSettings(res.settings);
+            } catch (error) {
+                console.error("Failed to fetch feature settings", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchSettings();
+    }, []);
+
+    const features = settings?.features?.items || [
         {
             title: "Custom Development",
             description: "Monitor your finances live with clear, intuitive dashboards.",
@@ -14,6 +34,8 @@ const Feature = () => {
         }
     ];
 
+    if (loading && !settings) return null;
+
     return (
         <section className="py-20 bg-white overflow-hidden">
             <div className="container mx-auto px-4">
@@ -22,8 +44,8 @@ const Feature = () => {
                     <span className="px-4 py-1.5 mb-6 text-sm font-medium tracking-wide text-slate-600 bg-slate-50 border border-slate-100 rounded-full shadow-sm hover:bg-slate-100 transition-colors cursor-default">
                         Features
                     </span>
-                    <h2 className="text-3xl md:text-4xl font-medium text-slate-900 text-center max-w-2xl leading-tight">
-                        Streamline Business with our Flexible Options
+                    <h2 className="text-3xl md:text-4xl font-medium text-slate-900 text-center max-w-2xl leading-tight font-clash-display">
+                        {settings?.features?.heading || "Streamline Business with our Flexible Options"}
                     </h2>
                 </div>
 
@@ -48,7 +70,7 @@ const Feature = () => {
                             <div className="mt-auto relative rounded-2xl overflow-hidden border border-slate-100/50 shadow-sm bg-white">
                                 <img
                                     src={feature.image}
-                                    alt={feature.alt}
+                                    alt={feature.alt || feature.title}
                                     className="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-110"
                                 />
                             </div>

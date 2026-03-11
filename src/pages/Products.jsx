@@ -1,58 +1,46 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Testimonial from "./Testimonial";
-import { products } from "../data/products";
+import { commonAPI } from "../lib/api";
 
 const Products = () => {
     const [openFaq, setOpenFaq] = useState(null);
+    const [products, setProducts] = useState([]);
+    const [faqs, setFaqs] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-    const testimonials = [
-        {
-            name: "Ajay Agarwal",
-            role: "CEO, AveeNa",
-            image: "/images/team/member1.png",
-        },
-        {
-            name: "Shriya Sadneni",
-            role: "Founder, Murzban",
-            image: "/images/team/member2.png",
-        },
-        {
-            name: "Muktesh Narula",
-            role: "CTO, DoveSoft",
-            image: "/images/team/member1.png",
-        },
-        {
-            name: "Yash Goswami",
-            role: "CEO, BiteBee",
-            image: "/images/team/member2.png",
-        },
-    ];
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const [prodRes, faqRes] = await Promise.all([
+                    commonAPI.getProducts(),
+                    commonAPI.getFAQs()
+                ]);
+                if (prodRes.success) setProducts(prodRes.products);
+                if (faqRes.success) setFaqs(faqRes.faqs);
+            } catch (error) {
+                console.error("Failed to fetch products page data", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchData();
+    }, []);
 
-    const faqs = [
+    const defaultFaqs = [
         {
             question: "What kind of SaaS products do you offer?",
             answer: "We offer a wide range of prebuilt SaaS solutions including grocery delivery, food ordering, ride sharing, eCommerce, on-demand services, pharmacy management, and restaurant ordering systems — all ready to deploy and fully customizable.",
         },
         {
             question: "Can I customize the prebuilt software to match my brand?",
-            answer: "Absolutely! All our prebuilt solutions are fully customizable. You can change the branding, colors, features, and workflows to perfectly align with your business identity and requirements.",
-        },
-        {
-            question: "How long does it take to deploy a prebuilt solution?",
-            answer: "Our prebuilt solutions can be deployed within 1-2 weeks, depending on the level of customization required. A standard deployment with minimal changes can go live in just 3-5 business days.",
-        },
-        {
-            question: "Do you provide ongoing support and maintenance?",
-            answer: "Yes, we provide comprehensive post-deployment support including bug fixes, security updates, performance optimization, and feature enhancements. We offer flexible maintenance plans tailored to your needs.",
-        },
-        {
-            question: "What technologies are used in your SaaS products?",
-            answer: "Our products are built with modern tech stacks including React, Node.js, React Native, MongoDB, and cloud infrastructure. This ensures scalability, security, and excellent performance across all platforms.",
-        },
+            answer: "Absolutely! All our prebuilt solutions are fully customizable.",
+        }
     ];
+
+    const displayFaqs = faqs.length > 0 ? faqs : defaultFaqs;
 
     return (
         <div className="relative min-h-screen bg-white overflow-x-hidden">
@@ -60,38 +48,31 @@ const Products = () => {
 
             {/* ====== Hero Section ====== */}
             <section className="relative overflow-hidden min-h-[90vh] flex flex-col justify-center bg-[url('/images/Bg2.png')] bg-no-repeat bg-cover bg-center pb-10">
-
                 <div className="relative z-10 flex flex-col items-center justify-center pt-40 pb-16 px-4 text-center">
                     <h1 className="text-5xl md:text-6xl lg:text-7xl font-medium text-slate-900 font-clash-display tracking-tight leading-[1.1]">
-                        Prebuilt Saas Software for
+                       Turning Ideas into Scalable
                     </h1>
                     <h1 className="text-5xl md:text-6xl lg:text-7xl font-medium text-slate-900 font-clash-display tracking-tight leading-[1.1] mt-2">
-                        Startups
+                        Products
                     </h1>
                     <p className="mt-5 max-w-lg mx-auto text-base md:text-lg text-gray-400 leading-relaxed">
-                        Pick a prebuilt SaaS solution, customize it to your brand, and launch your startup faster — without building from scratch.
+                        Transform your ideas into powerful, scalable digital products with rapid development and reliable support.
                     </p>
                 </div>
             </section>
 
             {/* ====== Scrolling Ticker ====== */}
-            <div className="w-full overflow-hidden relative z-20">
+            <div className="w-full bg-slate-900 py-4 md:py-5 overflow-hidden relative z-20">
                 <div className="animate-ticker flex items-center whitespace-nowrap">
-                    {[...Array(6)].map((_, i) => (
-                        <img
-                            key={i}
-                            src="/images/Developer.png"
-                            alt="Develop it from Best • Develop it Once"
-                            className="h-[70px] md:h-[80px] w-auto flex-shrink-0"
-                        />
-                    ))}
-                    {[...Array(6)].map((_, i) => (
-                        <img
-                            key={`dup-${i}`}
-                            src="/images/Developer.png"
-                            alt="Develop it from Best • Develop it Once"
-                            className="h-[70px] md:h-[80px] w-auto flex-shrink-0"
-                        />
+                    {[...Array(12)].map((_, i) => (
+                        <div key={i} className="flex items-center">
+                            <span className="text-white text-xl md:text-2xl font-medium tracking-wider uppercase font-clash-display mx-6 md:mx-10">
+                                RAPID DEVELOPMENT • CONTINUOUS SUPPORT
+                            </span>
+                            <span className="text-slate-500 text-xl md:text-2xl">
+                                •
+                            </span>
+                        </div>
                     ))}
                 </div>
             </div>
@@ -105,28 +86,31 @@ const Products = () => {
                             Our Products
                         </span>
                         <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium text-slate-900 text-center font-clash-display leading-tight">
-                            Check our SaaS Products
+                            Check our Products
                         </h2>
                     </div>
 
                     {/* Product Cards */}
                     <div className="space-y-20 md:space-y-28">
-                        {products.map((product, index) => (
+                        {loading ? (
+                            <div className="text-center py-20 text-slate-400">Loading our products...</div>
+                        ) : products.map((product, index) => (
                             <div
-                                key={index}
+                                key={product._id || index}
                                 className={`flex flex-col ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
                                     } items-center gap-10 md:gap-16 group`}
                             >
                                 {/* Text Content */}
                                 <div className="flex-1 space-y-5">
-                                    <h3 className="text-2xl md:text-3xl font-semibold text-slate-900 font-clash-display group-hover:text-emerald-600 transition-colors duration-300">
+                                    <h3 className="text-2xl md:text-3xl font-semibold text-slate-900 font-clash-display group-hover:text-blue-600 transition-colors duration-300">
                                         {product.title}
                                     </h3>
                                     <p className="text-slate-500 leading-relaxed text-sm md:text-base">
-                                        {product.description}
+                                        {product.description || product.tagline}
                                     </p>
                                     <Link
-                                        to={`/products/${product.slug}`}
+                                        target="blank"
+                                        to={``}
                                         className="inline-flex items-center gap-2 px-6 py-3 bg-slate-900 text-white text-sm font-medium rounded-full hover:bg-slate-800 transition-all duration-300 active:scale-95 group/btn"
                                     >
                                         Learn More
@@ -148,12 +132,12 @@ const Products = () => {
                                 </div>
 
                                 {/* Image */}
-                                <div className="flex-1 relative">
-                                    <div className="rounded-2xl overflow-hidden border border-slate-100 shadow-sm bg-white transition-all duration-500 group-hover:shadow-xl group-hover:-translate-y-2">
+                                <div className="flex-1 relative w-full">
+                                    <div className="rounded-2xl overflow-hidden border border-slate-100 shadow-sm bg-white transition-all duration-500 group-hover:shadow-xl group-hover:-translate-y-2 aspect-video flex items-center justify-center">
                                         <img
                                             src={product.image}
-                                            alt={product.alt}
-                                            className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                                            alt={product.title}
+                                            className="w-full h-full object-contain transition-transform duration-700 "
                                         />
                                     </div>
                                 </div>
@@ -178,9 +162,9 @@ const Products = () => {
                     </div>
 
                     <div className="space-y-4">
-                        {faqs.map((faq, index) => (
+                        {displayFaqs.map((faq, index) => (
                             <div
-                                key={index}
+                                key={faq._id || index}
                                 className="border border-slate-200 rounded-2xl overflow-hidden transition-all duration-300 hover:border-slate-300"
                             >
                                 <button

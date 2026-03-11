@@ -1,6 +1,22 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { commonAPI } from "../lib/api";
 
 const Header = () => {
+    const [settings, setSettings] = useState(null);
+
+    useEffect(() => {
+        const fetchSettings = async () => {
+            try {
+                const res = await commonAPI.getGlobalSettings();
+                if (res.success) setSettings(res.settings);
+            } catch (error) {
+                console.error("Failed to fetch header settings", error);
+            }
+        };
+        fetchSettings();
+    }, []);
+
     return (
         <header className="absolute top-4 left-1/2 -translate-x-1/2 z-50">
             <nav className=" flex justify-center items-center py-6 bg-transparent ">
@@ -11,7 +27,11 @@ const Header = () => {
                     </div>
                     <div className="flex justify-center">
                         <Link className="" to={'/'}>
-                            <img src="/images/Zaploom-logo.png" width={'100px'} alt="" />
+                            <img
+                                src={settings?.branding?.logo || "/images/Zaploom-logo.png"}
+                                width={'100px'}
+                                alt={settings?.branding?.siteName || "Zaploom"}
+                            />
                         </Link>
                     </div>
                     <div className="flex justify-center space-x-12">

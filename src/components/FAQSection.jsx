@@ -1,38 +1,37 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { commonAPI } from "../lib/api";
 
-const faqData = [
-    {
-        question: "What services does Zaploom offer?",
-        answer: "Zaploom offers end-to-end digital solutions including custom website development, mobile app development (Android & iOS), SaaS product development, UI/UX design, and digital strategy consulting. We build everything from scratch, tailored specifically to your business needs."
-    },
-    {
-        question: "How long does it take to build a custom website or app?",
-        answer: "The timeline depends on the project's scope and complexity. A standard website typically takes 2–4 weeks, while a full-featured mobile app or SaaS platform can take 6–12 weeks. We always provide a detailed project timeline before starting."
-    },
-    {
-        question: "Do you provide post-launch support and maintenance?",
-        answer: "Absolutely! We offer comprehensive post-launch support and maintenance packages. This includes bug fixes, performance optimization, security updates, and feature enhancements to keep your product running at its best."
-    },
-    {
-        question: "What technologies do you use for development?",
-        answer: "We use modern, industry-leading technologies including React, Next.js, Node.js, Flutter, React Native, MongoDB, PostgreSQL, and cloud services like AWS and Firebase. We choose the best tech stack based on your project requirements."
-    },
-    {
-        question: "Can I see progress during the development process?",
-        answer: "Yes! We follow an agile development approach with regular updates and demo sessions. You'll have full visibility into the project progress through shared dashboards, weekly reviews, and a dedicated project manager."
-    },
-    {
-        question: "How do I get started with Zaploom?",
-        answer: "Getting started is easy! Simply reach out to us through our contact form, email, or phone. We'll schedule a free consultation call to understand your requirements and provide a detailed proposal with timeline and cost estimate."
-    }
-];
-
-const FAQSection = () => {
+const FAQSection = ({ product }) => {
+    const [faqs, setFaqs] = useState([]);
     const [openIndex, setOpenIndex] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        if (product && product.faqs && product.faqs.length > 0) {
+            setFaqs(product.faqs);
+            setLoading(false);
+        } else {
+            const fetchGlobalFAQs = async () => {
+                try {
+                    const res = await commonAPI.getFAQs();
+                    if (res.success) {
+                        setFaqs(res.faqs);
+                    }
+                } catch (error) {
+                    console.error("Failed to fetch FAQs", error);
+                } finally {
+                    setLoading(false);
+                }
+            };
+            fetchGlobalFAQs();
+        }
+    }, [product]);
 
     const toggleFaq = (index) => {
         setOpenIndex(openIndex === index ? null : index);
     };
+
+    if (loading || faqs.length === 0) return null;
 
     return (
         <section className="py-20 bg-slate-50/50">
@@ -52,12 +51,12 @@ const FAQSection = () => {
 
                 {/* Accordion */}
                 <div className="space-y-3">
-                    {faqData.map((faq, index) => (
+                    {faqs.map((faq, index) => (
                         <div
                             key={index}
                             className={`bg-white rounded-2xl border transition-all duration-300 ${openIndex === index
-                                    ? "border-slate-300 shadow-md"
-                                    : "border-slate-200 shadow-sm hover:shadow-md"
+                                ? "border-slate-300 shadow-md"
+                                : "border-slate-200 shadow-sm hover:shadow-md"
                                 }`}
                         >
                             <button
@@ -69,8 +68,8 @@ const FAQSection = () => {
                                 </span>
                                 <span
                                     className={`flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full transition-all duration-300 ${openIndex === index
-                                            ? "bg-slate-900 text-white rotate-45"
-                                            : "bg-slate-100 text-slate-500"
+                                        ? "bg-slate-900 text-white rotate-45"
+                                        : "bg-slate-100 text-slate-500"
                                         }`}
                                 >
                                     <svg

@@ -1,82 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import TestimonialSection from "../components/TestimonialSection";
 import FAQSection from "../components/FAQSection";
-
-const projects = [
-    {
-        title: "Pran Spandan App",
-        category: "app",
-        image: "/images/productImage/PranSpandan.png",
-        points: [
-            "Modern sweets store with responsive design for smooth shopping.",
-            "Intuitive product catalog with categories and search functionality.",
-            "Seamless ordering system with real-time order tracking.",
-            "Integrated payment gateway for secure transactions.",
-        ],
-    },
-    {
-        title: "True Bite App",
-        category: "app",
-        image: "/images/productImage/True_Bite_App.png",
-        points: [
-            "TrueBite AI is a smart food companion app designed to help users decode the health impact of packaged food.",
-            "AI-powered food label scanner with instant health insights.",
-            "Personalized dietary recommendations based on user preferences.",
-            "Comprehensive nutritional database with detailed breakdowns.",
-        ],
-    },
-    {
-        title: "BDEA: Bhartiya Driver Ekta Association App",
-        category: "app",
-        image: "/images/productImage/bdea.png",
-        points: [
-            "Community-driven organization app dedicated to Indian drivers.",
-            "Member registration, ID cards, and community networking features.",
-            "Emergency assistance and grievance redressal system.",
-            "News feed and event management for driver community updates.",
-        ],
-    },
-    {
-        title: "Nursing Career & Community App",
-        category: "app",
-        image: "/images/productImage/nursing.png",
-        points: [
-            "Cross-platform mobile app built specifically for nursing professionals in Germany.",
-            "Job listing aggregation with smart filters and notifications.",
-            "Professional networking and community forum features.",
-            "Career guidance tools and certification tracking dashboard.",
-        ],
-    },
-    {
-        title: "Smart Vending & Food Ordering App",
-        category: "app",
-        image: "/images/productImage/vending.png",
-        points: [
-            "Complete cross-platform mobile solution for a vending business (Android & iOS).",
-            "Real-time vending machine inventory monitoring and management.",
-            "QR-code based contactless payment and ordering system.",
-            "Admin dashboard with sales analytics and restock alerts.",
-        ],
-    },
-    {
-        title: "Cipl Perfume",
-        category: "website",
-        image: "/images/productImage/ciplperfume.png",
-        points: [
-            "White-Label Perfume Manufacturing for Global Brands.",
-            "Elegant product showcase with immersive visual experience.",
-            "Custom inquiry and bulk order management system.",
-            "SEO-optimized pages for global brand visibility.",
-        ],
-    },
-];
+import { commonAPI } from "../lib/api";
 
 const tabs = ["Websites", "Applications"];
 
 const Customized = () => {
     const [activeTab, setActiveTab] = useState("Websites");
+    const [projects, setProjects] = useState([]);
+
+    useEffect(() => {
+        const fetchProjects = async () => {
+            try {
+                const res = await commonAPI.getProducts();
+                if (res.success) setProjects(res.products);
+            } catch (error) {
+                console.error("Failed to fetch projects", error);
+            }
+        };
+        fetchProjects();
+    }, []);
 
     const filteredProjects = projects.filter((p) =>
         activeTab === "Websites"
@@ -103,23 +48,17 @@ const Customized = () => {
             </main>
 
             {/* Scrolling Ticker */}
-            <div className="w-full overflow-hidden relative z-20">
+            <div className="w-full bg-slate-900 py-4 md:py-5 overflow-hidden relative z-20">
                 <div className="animate-ticker flex items-center whitespace-nowrap">
-                    {[...Array(6)].map((_, i) => (
-                        <img
-                            key={i}
-                            src="/images/Developer.png"
-                            alt="Develop it from Best • Develop it Once"
-                            className="h-[70px] md:h-[80px] w-auto flex-shrink-0"
-                        />
-                    ))}
-                    {[...Array(6)].map((_, i) => (
-                        <img
-                            key={`dup-${i}`}
-                            src="/images/Developer.png"
-                            alt="Develop it from Best • Develop it Once"
-                            className="h-[70px] md:h-[80px] w-auto flex-shrink-0"
-                        />
+                    {[...Array(12)].map((_, i) => (
+                        <div key={i} className="flex items-center">
+                            <span className="text-white text-xl md:text-2xl font-medium tracking-wider uppercase font-clash-display mx-6 md:mx-10">
+                                RAPID DEVELOPMENT • CONTINUOUS SUPPORT
+                            </span>
+                            <span className="text-slate-500 text-xl md:text-2xl">
+                                •
+                            </span>
+                        </div>
                     ))}
                 </div>
             </div>
@@ -171,7 +110,7 @@ const Customized = () => {
                                             <img
                                                 src={project.image}
                                                 alt={project.title}
-                                                className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                                                className="w-full h-auto object-cover transition-transform duration-700 "
                                             />
                                         </div>
                                     </div>
@@ -182,24 +121,70 @@ const Customized = () => {
                                             {project.title}
                                         </h3>
                                         <ul className="space-y-3">
-                                            {project.points.map(
-                                                (point, pIdx) => (
+                                            {project.features.map(
+                                                (feature, pIdx) => (
                                                     <li
                                                         key={pIdx}
                                                         className="flex items-start gap-3 text-slate-600 text-sm leading-relaxed"
                                                     >
                                                         <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-slate-400 flex-shrink-0"></span>
-                                                        {point}
+                                                        {feature.desc}
                                                     </li>
                                                 )
                                             )}
                                         </ul>
-                                        <button className="mt-6 inline-flex items-center gap-2 px-6 py-2.5 bg-slate-900 text-white text-sm font-medium rounded-full hover:bg-slate-800 transition-all duration-300 hover:gap-3 cursor-pointer">
-                                            {project.category === "website" ? "View Website" : "View App"}
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                                            </svg>
-                                        </button>
+                                        <div className="mt-6 flex items-center gap-3">
+                                            {project.category === "website" ? (
+                                                <a
+                                                    href={project.detailLink}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="inline-flex items-center gap-3 px-4 py-2 bg-black text-white rounded-xl hover:bg-gray-900 transition-all duration-300 cursor-pointer border border-gray-700"
+                                                >
+                                                    <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                                                    </svg>
+                                                    <div className="flex flex-col leading-tight">
+                                                        <span className="text-[10px] text-gray-300 font-normal">VISIT US ON</span>
+                                                        <span className="text-sm font-semibold">Website</span>
+                                                    </div>
+                                                </a>
+                                            ) : (
+                                                <>
+                                                    <a
+                                                        href={project.androidLink}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="inline-flex items-center gap-3 px-4 py-2 bg-black text-white rounded-xl hover:bg-gray-900 transition-all duration-300 cursor-pointer border border-gray-700"
+                                                    >
+                                                        <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 flex-shrink-0" viewBox="0 0 512 512" fill="currentColor">
+                                                            <path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l2.6 1.5 247.1-247v-5.8L47 0zm425 225L371.7 173l-61.8 61.8 61.8 61.8L472 244c12.7-7.3 12.7-19.5 0-19z" fill="#EA4335"/>
+                                                            <path d="M325.3 234.3L104.6 13l-57.6 57.6 278.3 163.7z" fill="#FBBC04"/>
+                                                            <path d="M47 512c13 6.8 29.6 5.8 47-5.8L371.7 305.5l-46.4-46.4L47 512z" fill="#34A853"/>
+                                                            <path d="M472 244l-100.3-57.6-61.8 61.8 61.8 61.8L472 252c6.3-3.6 9.7-8.5 9.7-14s-3.4-10.4-9.7-14z" fill="#4285F4"/>
+                                                        </svg>
+                                                        <div className="flex flex-col leading-tight">
+                                                            <span className="text-[10px] text-gray-300 font-normal">GET IT ON</span>
+                                                            <span className="text-sm font-semibold">Google Play</span>
+                                                        </div>
+                                                    </a>
+                                                    <a
+                                                        href={project.iosLink}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="inline-flex items-center gap-3 px-4 py-2 bg-black text-white rounded-xl hover:bg-gray-900 transition-all duration-300 cursor-pointer border border-gray-700"
+                                                    >
+                                                        <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                                                            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                                                        </svg>
+                                                        <div className="flex flex-col leading-tight">
+                                                            <span className="text-[10px] text-gray-300 font-normal">Download on the</span>
+                                                            <span className="text-sm font-semibold">App Store</span>
+                                                        </div>
+                                                    </a>
+                                                </>
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
                             );

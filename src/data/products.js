@@ -1,6 +1,8 @@
 export const products = [
     {
         slug: "pran-spandan-app",
+        isFeatured: true,
+        detailLink: "#",
         title: "Pran Spandan App",
         tagline: "Modern Sweets Store Solutions",
         description: "Pran Spandan is a modern sweets store application featuring an intuitive product catalog, seamless ordering system, and real-time tracking for a smooth shopping experience.",
@@ -22,6 +24,8 @@ export const products = [
     },
     {
         slug: "true-bite-app",
+        isFeatured: true,
+        detailLink: "https://medium.com/@singhkapil/truebite-ai-smart-food-scanner-health-analyzer-3614cac4015e",
         title: "True Bite App",
         tagline: "Smart Food & Health Companion",
         description: "TrueBite AI is a smart food companion app designed to help users decode the health impact of packaged food using AI-powered label scanning and personalized insights.",
@@ -46,6 +50,8 @@ export const products = [
     },
     {
         slug: "bdea-app",
+        isFeatured: true,
+        detailLink: "https://medium.com/@singhkapil/bdea-bhartiya-driver-ekta-association-app-db9aadc13df8",
         title: "BDEA App",
         tagline: "Bhartiya Driver Ekta Association",
         description: "A community-driven organization app dedicated to Indian drivers, providing registration, emergency assistance, and networking features for professional drivers.",
@@ -70,6 +76,8 @@ export const products = [
     },
     {
         slug: "nursing-career-app",
+        isFeatured: false,
+        detailLink: "https://medium.com/@singhkapil/carerockets-nursing-career-community-app-abeb9e4d451a",
         title: "Nursing Career & Community App",
         tagline: "Empowering Nurses in Germany",
         description: "A specialized cross-platform mobile application built specifically for nursing professionals in Germany, featuring job listings, professional networking, and career tools.",
@@ -100,6 +108,8 @@ export const products = [
     },
     {
         slug: "smart-vending-app",
+        isFeatured: false,
+        detailLink: "https://medium.com/@singhkapil/smart-vending-food-ordering-app-7884b402bd03",
         title: "Smart Vending & Food Ordering",
         tagline: "Contactless Vending Solutions",
         description: "A complete cross-platform mobile solution for vending businesses, featuring real-time inventory monitoring, QR-based payments, and advanced admin analytics.",
@@ -130,6 +140,8 @@ export const products = [
     },
     {
         slug: "cipl-perfume-website",
+        isFeatured: false,
+        detailLink: "https://ciplperfume.com",
         title: "Cipl Perfume",
         tagline: "Global Brand Perfume Manufacturing",
         description: "A high-end website for white-label perfume manufacturing, featuring elegant product showcases, custom inquiry systems, and global SEO optimization.",
@@ -146,6 +158,81 @@ export const products = [
         ],
         faqs: [
             { question: "Do you support global shipping?", answer: "Yes, our manufacturing and logistics are set up for global delivery." }
+        ]
+    },
+    {
+        slug: "The-efiling-website",
+        isFeatured: false,
+        detailLink: "https://theefiling.com",
+        title: "Theefiling",
+        tagline: "We make Income tax simple",
+        description: "Elevate your financial strategy with modern advisory services designed for the future of SMEs and global corporates.",
+        image: "/images/productImage/theefiling.png",
+        alt: "Theefiling Website",
+        features: [
+            { title: "ITR Filing", desc: "Hassle-free Income Tax Return filing for individuals, SMEs, and corporates.", icon: "FileIcon" },
+            { title: "Tax & Audit", desc: "Comprehensive tax audit, statutory audit, and internal audit services.", icon: "AuditIcon" },
+            { title: "Accounting", desc: "Day-to-day accounting and compliance review to keep your finances in order.", icon: "LedgerIcon" },
+            { title: "Secure Portal", desc: "Enterprise-grade 256-bit SSL encryption with ISO 27001 certified document management.", icon: "ShieldIcon" }
+        ],
+        techStack: [
+            { name: "Next.js", icon: "https://cdn.simpleicons.org/nextdotjs" }
+        ],
+        faqs: [
+            { question: "What services does TheEFiling offer?", answer: "TheEFiling provides ITR filing, tax audits, day-to-day accounting, compliance reviews, statutory audits, and internal audit services for individuals and businesses." },
+            { question: "Which industries does TheEFiling specialize in?", answer: "TheEFiling has deep expertise in the Diamond and Textile sectors, along with serving SMEs and global corporates across various industries." },
+            { question: "Is my financial data secure on the platform?", answer: "Yes, the platform uses enterprise-grade 256-bit SSL encryption and is ISO 27001 certified, ensuring your documents and data are fully protected." },
+            { question: "Do you offer support after filing?", answer: "Yes, TheEFiling provides 24/7 customer support to assist you before, during, and after the filing process." }
+        ]
+    },
+    {
+        slug: "lumive-website",
+        isFeatured: false,
+        detailLink: "https://lumive.in",
+        title: "Lumive",
+        tagline: "Surat's #1 Skin Clinic for Advanced Dermatology Care",
+        description: "LumiVe is a premium dermatology clinic in Surat offering advanced laser treatments, personalized skincare, and expert clinical care. With 15,000+ satisfied patients and a 4.9-star rating, LumiVe combines state-of-the-art technology with board-certified specialists for exceptional skin health outcomes.",
+        image: "/images/productImage/lumive.png",
+        alt: "Lumive Website",
+        features: [
+            { title: "Laser Treatments", desc: "Advanced Diode Laser and IPL technology for hair removal, tattoo removal, and skin rejuvenation.", icon: "LaserIcon" },
+            { title: "Acne & Skin Care", desc: "Targeted treatments for acne, pimples, scars, skin brightening, and anti-aging.", icon: "SkinIcon" },
+            { title: "Personalized Plans", desc: "Customized treatment roadmaps tailored to each patient's unique skin type and concerns.", icon: "PlanIcon" },
+            { title: "Expert Specialists", desc: "Board-certified dermatologists with 15,000+ patients treated and a 4.9-star rating.", icon: "DoctorIcon" }
+        ],
+        techStack: [
+            { name: "Next.js", icon: "https://cdn.simpleicons.org/nextdotjs" }
+        ],
+        faqs: [
+            { question: "What treatments does LumiVe offer?", answer: "LumiVe offers laser hair removal, tattoo removal, Hydra-Facial, acne and scar treatment, skin brightening, anti-aging, and hair fall treatments." },
+            { question: "How many patients has LumiVe treated?", answer: "LumiVe has served 15,000+ satisfied patients with a 4.9-star rating and over 500 successful treatments completed since 2015." },
+            { question: "Is laser treatment safe for all skin types?", answer: "Yes, LumiVe uses advanced Diode Laser and IPL technologies that are safe and effective across all colors, sizes, and skin types." },
+            { question: "How do I get started with a treatment?", answer: "You can book a consultation where a board-certified specialist will assess your skin and create a personalized treatment plan tailored to your needs." }
+        ]
+    },
+    {
+        slug: "the-alps-website",
+        isFeatured: false,
+        detailLink: "https://alpsctc.com",
+        title: "The Alps",
+        tagline: "Helping Indian Entrepreneurs Close More Deals for 21+ Years",
+        description: "Alps Corporate Training Company (ALPS CTC) is a Surat-based sales training and coaching firm with over 21 years of experience. They empower Indian entrepreneurs and sales teams with proven frameworks, hands-on coaching, and actionable strategies to consistently close more deals and scale their business.",
+        image: "/images/productImage/thealps.png",
+        alt: "Alps CTC Website",
+        features: [
+            { title: "Sales Training", desc: "Proven sales training programs designed to help entrepreneurs and teams close more deals consistently.", icon: "TrainingIcon" },
+            { title: "1-on-1 Coaching", desc: "Personalized coaching sessions tailored to individual business challenges and sales goals.", icon: "CoachIcon" },
+            { title: "21+ Years Expertise", desc: "Over two decades of hands-on experience in sales training across diverse Indian industries.", icon: "ExpertIcon" },
+            { title: "Actionable Programs", desc: "Structured programs with real-world frameworks that deliver measurable results for sales teams.", icon: "ProgramIcon" }
+        ],
+        techStack: [
+            { name: "Next.js", icon: "https://cdn.simpleicons.org/nextdotjs" }
+        ],
+        faqs: [
+            { question: "Who is ALPS CTC best suited for?", answer: "ALPS CTC is designed for Indian entrepreneurs, sales professionals, and business teams who want to improve their closing skills and grow their revenue." },
+            { question: "What kind of programs does ALPS CTC offer?", answer: "ALPS CTC offers sales training workshops, one-on-one coaching, and structured programs built around proven deal-closing frameworks." },
+            { question: "How experienced is the ALPS CTC team?", answer: "ALPS CTC brings 21+ years of experience in sales training and coaching, having worked with entrepreneurs and businesses across India." },
+            { question: "How can I enroll in a program?", answer: "You can reach out via the contact form on the website or call +91 94279 66441 to discuss the right program for your team." }
         ]
     }
 ];
