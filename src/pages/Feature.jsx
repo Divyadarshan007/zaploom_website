@@ -2,24 +2,30 @@ import { useState, useEffect } from "react";
 import { commonAPI } from "../lib/api";
 
 const Feature = () => {
+    const [services, setServices] = useState([]);
     const [settings, setSettings] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const fetchSettings = async () => {
+        const fetchData = async () => {
             try {
-                const res = await commonAPI.getHomeSettings();
-                if (res.success) setSettings(res.settings);
+                const [settingsRes, servicesRes] = await Promise.all([
+                    commonAPI.getHomeSettings(),
+                    commonAPI.getServices(true)
+                ]);
+                
+                if (settingsRes.success) setSettings(settingsRes.settings);
+                if (servicesRes.success) setServices(servicesRes.services);
             } catch (error) {
-                console.error("Failed to fetch feature settings", error);
+                console.error("Failed to fetch features", error);
             } finally {
                 setLoading(false);
             }
         };
-        fetchSettings();
+        fetchData();
     }, []);
 
-    const features = settings?.features?.items || [
+    const displayServices = services.length > 0 ? services : [
         {
             title: "Custom Development",
             description: "Monitor your finances live with clear, intuitive dashboards.",
@@ -33,6 +39,13 @@ const Feature = () => {
             alt: "SaaS Prebuilt Mockup"
         }
     ];
+
+    const getImageUrl = (url) => {
+        if (!url) return "";
+        if (url.startsWith("http") || url.startsWith("data:") || url.startsWith("/images/") || url.startsWith("/gifs/")) return url;
+        const baseUrl = import.meta.env.VITE_IMAGE_BASE_URL || "http://localhost:5000";
+        return `${baseUrl}${url.startsWith("/") ? "" : "/"}${url}`;
+    };
 
     if (loading && !settings) return null;
 
@@ -50,29 +63,33 @@ const Feature = () => {
                 </div>
 
                 {/* Cards Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-                    {features.map((feature, index) => (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+                    {displayServices.map((service, index) => (
                         <div
                             key={index}
                             className="group relative bg-[#F8FDF9] rounded-3xl border border-slate-100 p-8 md:p-10 transition-all duration-500 hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)] hover:-translate-y-2 overflow-hidden flex flex-col"
                         >
                             {/* Card Content */}
                             <div className="mb-8">
-                                <h3 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-emerald-600 transition-colors duration-300">
-                                    {feature.title}
+                                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-emerald-600 transition-colors duration-300">
+                                    {service.title}
                                 </h3>
-                                <p className="text-slate-600 leading-relaxed font-medium">
-                                    {feature.description}
+                                <p className="text-slate-600 leading-relaxed font-medium text-sm">
+                                    {service.description}
                                 </p>
                             </div>
 
                             {/* Image Container with Zoom Effect */}
-                            <div className="mt-auto relative rounded-2xl overflow-hidden border border-slate-100/50 shadow-sm bg-white">
-                                <img
-                                    src={feature.image}
-                                    alt={feature.alt || feature.title}
-                                    className="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-110"
-                                />
+                            <div className="mt-auto relative rounded-2xl overflow-hidden border border-slate-100/50 shadow-sm bg-white aspect-video flex items-center justify-center">
+                                {service.image ? (
+                                    <img
+                                        src={getImageUrl(service.image)}
+                                        alt={service.alt || service.title}
+                                        className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
+                                    />
+                                ) : (
+                                    <div className="text-slate-300">No Image</div>
+                                )}
                             </div>
                         </div>
                     ))}

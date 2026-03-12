@@ -36,6 +36,7 @@ const productSchema = new mongoose.Schema(
         detailLink: { type: String, trim: true, default: '' },
         androidLink: { type: String, trim: true, default: '' },
         iosLink: { type: String, trim: true, default: '' },
+        isOwnProduct: { type: Boolean, default: false },
         isActive: { type: Boolean, default: true },
         showOnHomePage: { type: Boolean, default: true },
         order: { type: Number, default: 0 },

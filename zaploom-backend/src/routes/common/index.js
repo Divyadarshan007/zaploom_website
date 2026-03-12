@@ -12,6 +12,7 @@ const {
     getTestimonials, getTeamMembers, getFaqs,
     submitContact,
     getHomePage, getAboutPage, getContactPage, getGlobalSettings,
+    getServices,
 } = require('./controllers/public.controller');
 
 // Public data endpoints
@@ -20,6 +21,7 @@ router.get('/products/:slug', getProductBySlug);
 router.get('/testimonials', getTestimonials);
 router.get('/team-members', getTeamMembers);
 router.get('/faqs', getFaqs);
+router.get('/services', getServices);
 
 // Contact form
 router.post('/contact', validate(contactSchema), submitContact);

@@ -85,29 +85,77 @@ const About = () => {
 
             {/* ═══════════════ BUILDING THE DIGITAL FUTURE ═══════════════ */}
             <section className="py-24 bg-white">
-                <div className="max-w-5xl mx-auto px-4 md:px-8">
-                    {/* Section Title */}
-                    <div className="flex flex-col items-center mb-14">
-                        <div className="w-16 h-[2px] bg-slate-900 mb-6"></div>
-                        <h2 className="text-3xl md:text-4xl font-semibold text-slate-900 text-center tracking-tight font-clash-display">
-                            {settings?.story?.title || "Building the Digital Future"}
-                        </h2>
-                    </div>
+                <div className="max-w-7xl mx-auto px-4 md:px-8">
+                    <div className="flex flex-col lg:flex-row items-center gap-16">
+                        {/* Content Side */}
+                        <div className="lg:w-1/2">
+                            <div className="flex flex-col items-start mb-10">
+                                <div className="w-16 h-[2px] bg-slate-900 mb-6"></div>
+                                <h2 className="text-4xl md:text-5xl font-semibold text-slate-900 tracking-tight font-clash-display leading-tight">
+                                    {settings?.story?.title || "Building the Digital Future"}
+                                </h2>
+                            </div>
 
-                    <div
-                        className="max-w-4xl mx-auto space-y-6 text-gray-600 text-base md:text-lg leading-relaxed text-center"
-                        dangerouslySetInnerHTML={{ __html: settings?.story?.content || `<p>At Zaploom, we are on a mission to redefine the digital experience...</p>` }}
-                    />
+                            <div
+                                className="space-y-6 text-gray-600 text-lg leading-relaxed text-left mb-12"
+                                dangerouslySetInnerHTML={{ __html: settings?.story?.content || `
+                                    <p>At Zaploom, we are on a mission to redefine the digital experience. We believe that technology should be an enabler, not a barrier, helping businesses reach their full potential through innovative solutions and cutting-edge design.</p>
+                                    <p>Our approach combines technical excellence with a deep understanding of market dynamics, ensuring that every product we build is not only functional but also strategically positioned for success.</p>
+                                ` }}
+                            />
 
-                    {/* ── Mission/Vision ── */}
-                    <div className="mt-20 grid grid-cols-1 md:grid-cols-2 gap-10">
-                        <div className="p-8 rounded-3xl bg-slate-50 border border-slate-100">
-                            <h3 className="text-2xl font-bold text-slate-900 mb-4 font-clash-display">Our Mission</h3>
-                            <p className="text-slate-600 leading-relaxed">{settings?.mission || "To provide groundbreaking products that bring value to businesses."}</p>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div className="p-6 rounded-3xl bg-slate-50 border border-slate-100 hover:shadow-lg transition-all duration-300">
+                                    <div className="w-12 h-12 rounded-2xl bg-emerald-50 flex items-center justify-center mb-5">
+                                        <svg className="w-6 h-6 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                        </svg>
+                                    </div>
+                                    <h3 className="text-xl font-bold text-slate-900 mb-3 font-clash-display">Our Mission</h3>
+                                    <p className="text-slate-600 text-sm leading-relaxed">{settings?.mission || "To provide groundbreaking products that bring value to businesses through innovation."}</p>
+                                </div>
+                                <div className="p-6 rounded-3xl bg-slate-50 border border-slate-100 hover:shadow-lg transition-all duration-300">
+                                    <div className="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center mb-5">
+                                        <svg className="w-6 h-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                        </svg>
+                                    </div>
+                                    <h3 className="text-xl font-bold text-slate-900 mb-3 font-clash-display">Our Vision</h3>
+                                    <p className="text-slate-600 text-sm leading-relaxed">{settings?.vision || "To be the most trusted technology partner for brands worldwide, setting new standards."}</p>
+                                </div>
+                                <div className="p-6 rounded-3xl bg-slate-50 border border-slate-100 hover:shadow-lg transition-all duration-300 sm:col-span-2">
+                                    <div className="flex items-center gap-4 mb-4">
+                                        <div className="w-12 h-12 rounded-2xl bg-purple-50 flex items-center justify-center">
+                                            <svg className="w-6 h-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                                            </svg>
+                                        </div>
+                                        <h3 className="text-xl font-bold text-slate-900 font-clash-display">Our Core Values</h3>
+                                    </div>
+                                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                        <div className="bg-white p-4 rounded-2xl border border-slate-100 italic text-slate-600 text-sm">"Innovation in every byte"</div>
+                                        <div className="bg-white p-4 rounded-2xl border border-slate-100 italic text-slate-600 text-sm">"Integrity and Transparency"</div>
+                                        <div className="bg-white p-4 rounded-2xl border border-slate-100 italic text-slate-600 text-sm">"Customer Success Priority"</div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div className="p-8 rounded-3xl bg-slate-50 border border-slate-100">
-                            <h3 className="text-2xl font-bold text-slate-900 mb-4 font-clash-display">Our Vision</h3>
-                            <p className="text-slate-600 leading-relaxed">{settings?.vision || "To be the most trusted technology partner for brands worldwide."}</p>
+
+                        {/* Image Side */}
+                        <div className="lg:w-1/2 relative">
+                            <div className="relative z-10 rounded-[3rem] overflow-hidden shadow-2xl transform hover:scale-[1.02] transition-transform duration-500">
+                                <img
+                                    src="/images/digital-future.png"
+                                    alt="Building the Digital Future"
+                                    className="w-full h-auto object-cover"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-tr from-slate-900/20 to-transparent"></div>
+                            </div>
+                            
+                            {/* Decorative Elements */}
+                            <div className="absolute -top-10 -right-10 w-40 h-40 bg-emerald-100/50 blur-3xl rounded-full -z-10"></div>
+                            <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-blue-100/50 blur-3xl rounded-full -z-10"></div>
                         </div>
                     </div>
                 </div>

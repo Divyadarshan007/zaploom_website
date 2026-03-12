@@ -12,6 +12,7 @@ const HomePage = require('../../../models/HomePage.model');
 const AboutPage = require('../../../models/AboutPage.model');
 const ContactPage = require('../../../models/ContactPage.model');
 const GlobalSettings = require('../../../models/GlobalSettings.model');
+const Service = require('../../../models/Service.model');
 const { success, error } = require('../../../utils/response');
 
 // Products
@@ -126,9 +127,24 @@ const getGlobalSettings = async (req, res) => {
     }
 };
 
+const getServices = async (req, res) => {
+    try {
+        const { featured } = req.query;
+        const query = { isActive: true };
+        if (featured === 'true') query.isFeatured = true;
+        
+        const services = await Service.find(query).sort({ order: 1, createdAt: -1 });
+        return success(res, 'Services retrieved', { services });
+    } catch (err) {
+        console.error('Public Get Services Error:', err);
+        return error(res, 'Failed to retrieve services');
+    }
+};
+
 module.exports = {
     getProducts, getProductBySlug,
     getTestimonials, getTeamMembers, getFaqs,
     submitContact,
     getHomePage, getAboutPage, getContactPage, getGlobalSettings,
+    getServices,
 };

@@ -70,14 +70,14 @@ const Footer = () => {
                     </div>
 
                     {/* Column 2: More Resources */}
-                    <div>
+                    {/* <div>
                         <h4 className="text-slate-400 text-sm font-medium mb-6">More Resources</h4>
                         <ul className="flex flex-col gap-4 text-sm text-slate-900">
                             <li><Link to="/blogs" className="hover:text-slate-400 transition-colors">Blogs</Link></li>
                             <li><Link to="/terms" className="hover:text-slate-400 transition-colors">Terms & Conditions</Link></li>
                             <li><Link to="/privacy" className="hover:text-slate-400 transition-colors">Privacy Policy</Link></li>
                         </ul>
-                    </div>
+                    </div> */}
                 </div>
             </div>
 

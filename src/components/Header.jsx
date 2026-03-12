@@ -8,8 +8,18 @@ const Header = () => {
     useEffect(() => {
         const fetchSettings = async () => {
             try {
+                // Check if settings are cached in sessionStorage
+                const cachedSettings = sessionStorage.getItem("globalSettings");
+                if (cachedSettings) {
+                    setSettings(JSON.parse(cachedSettings));
+                }
+
+                // Still fetch in background or if cache is empty to ensure freshness
                 const res = await commonAPI.getGlobalSettings();
-                if (res.success) setSettings(res.settings);
+                if (res.success) {
+                    setSettings(res.settings);
+                    sessionStorage.setItem("globalSettings", JSON.stringify(res.settings));
+                }
             } catch (error) {
                 console.error("Failed to fetch header settings", error);
             }
@@ -28,7 +38,7 @@ const Header = () => {
                     <div className="flex justify-center">
                         <Link className="" to={'/'}>
                             <img
-                                src={settings?.branding?.logo || "/images/Zaploom-logo.png"}
+                                src={settings?.branding?.logo || "/images/zaploom-logo.svg"}
                                 width={'100px'}
                                 alt={settings?.branding?.siteName || "Zaploom"}
                             />

@@ -51,6 +51,7 @@ const products = [
         ],
         faqs: [{ question: "How accurate is the AI scanner?", answer: "Our AI uses advanced image recognition and a verified database to provide highly accurate nutritional insights." }],
         category: "app", androidLink: "https://play.google.com/store/apps/details?id=com.adityatechnologies.truebite&pcampaignid=web_share", iosLink: "https://apps.apple.com/in/app/truebite/id6749226496",
+        isOwnProduct: true,
         isActive: true, showOnHomePage: true, order: 2
     },
     {

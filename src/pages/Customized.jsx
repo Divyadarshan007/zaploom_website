@@ -23,11 +23,13 @@ const Customized = () => {
         fetchProjects();
     }, []);
 
-    const filteredProjects = projects.filter((p) =>
-        activeTab === "Websites"
-            ? p.category === "website"
-            : p.category === "app"
-    );
+    const filteredProjects = projects
+        .filter((p) => !p.isOwnProduct)
+        .filter((p) =>
+            activeTab === "Websites"
+                ? p.category === "website"
+                : p.category === "app"
+        );
 
     return (
         <div className="relative min-h-screen bg-white overflow-x-hidden">

@@ -8,6 +8,7 @@ const HomePage = require('./HomePage.model');
 const AboutPage = require('./AboutPage.model');
 const ContactPage = require('./ContactPage.model');
 const GlobalSettings = require('./GlobalSettings.model');
+const Service = require('./Service.model');
 
 module.exports = {
     Admin,
@@ -20,4 +21,5 @@ module.exports = {
     AboutPage,
     ContactPage,
     GlobalSettings,
+    Service,
 };

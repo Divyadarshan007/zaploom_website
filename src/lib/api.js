@@ -24,6 +24,7 @@ export const commonAPI = {
     getTestimonials: () => api.get('/common/testimonials'),
     getTeam: () => api.get('/common/team-members'),
     getFAQs: () => api.get('/common/faqs'),
+    getServices: (featured = false) => api.get('/common/services', { params: { featured } }),
     getHomeSettings: () => api.get('/common/page-settings/home'),
     getAboutSettings: () => api.get('/common/page-settings/about'),
     getContactSettings: () => api.get('/common/page-settings/contact'),
