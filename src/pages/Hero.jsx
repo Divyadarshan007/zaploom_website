@@ -22,7 +22,7 @@ const Hero = () => {
     }, []);
 
     const heroData = settings?.hero || {
-        heading: "Build your Business with Zaploom",
+        heading: "Launch, Build, and Grow Your Business with Zaploom",
         subheading: "",
         primaryCTA: { label: "Let's Explore", href: "/customized" },
         secondaryCTA: { label: "Contact Us", href: "/contact" }
@@ -33,7 +33,7 @@ const Hero = () => {
             <section className="relative overflow-hidden min-h-[90vh] flex flex-col justify-center bg-[url('/images/Bg2.png')] bg-no-repeat bg-cover bg-center">
                 <Header />
                 <div className="relative z-10 flex flex-col items-center gap-5 justify-center pt-40  px-4 text-center">
-                    <h1 className="text-4xl md:text-7xl font-medium text-center max-w-4xl">
+                    <h1 className="text-4xl md:text-5xl font-medium text-center max-w-4xl">
                         {heroData.heading}
                     </h1>
                     {heroData.subheading && (
@@ -80,6 +80,8 @@ const Hero = () => {
                                 key={index}
                                 src={`/images/trustedby/${logo}`}
                                 alt={`Trusted Brand ${index}`}
+                                loading="lazy"
+                                decoding="async"
                                 className={`${logo.includes('efiling') || logo.includes('1495155934_LUMIVE') ? 'h-16 md:h-24' : 'h-10 md:h-12'} w-auto object-contain`}
                             />
                         ))}

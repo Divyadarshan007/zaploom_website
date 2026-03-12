@@ -23,6 +23,13 @@ const Portfolio = () => {
         fetchProducts();
     }, []);
 
+    const getImageUrl = (url) => {
+        if (!url) return "";
+        if (url.startsWith("http") || url.startsWith("data:") || url.startsWith("/images/")) return url;
+        const baseUrl = import.meta.env.VITE_IMAGE_BASE_URL || "http://localhost:5000";
+        return `${baseUrl}${url.startsWith("/") ? "" : "/"}${url}`;
+    };
+
     const itemsToShow = portfolioItems.length > 0 ? portfolioItems : [
         {
             title: "Pran Spandan App",
@@ -49,8 +56,8 @@ const Portfolio = () => {
                     <span className="px-4 py-1.5 mb-6 text-sm font-medium tracking-wide text-slate-600 bg-slate-50 border border-slate-100 rounded-full shadow-sm hover:bg-slate-100 transition-colors cursor-default">
                         Social Presence
                     </span>
-                    <h2 className="text-3xl md:text-4xl font-medium text-slate-900 leading-tight">
-                        Turning Visions Into Digital Reality
+                    <h2 className="text-3xl md:text-4xl font-medium text-slate-900 max-w-2xl leading-tight">
+                        Real Solutions We’ve Built for Modern Businesses
                     </h2>
                 </div>
 
@@ -67,7 +74,7 @@ const Portfolio = () => {
                             {/* Card Top: Mockup Area */}
                             <div className="relative rounded-2xl overflow-hidden border border-slate-100/50 shadow-sm bg-white mb-6 aspect-video flex items-center justify-center">
                                 <img
-                                    src={item.image.startsWith('http') ? item.image : item.image}
+                                    src={getImageUrl(item.image)}
                                     alt={item.title}
                                     className="w-full h-full object-contain transform transition-transform duration-700 group-hover:scale-105"
                                 />

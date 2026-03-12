@@ -194,7 +194,7 @@ export function ServiceForm({ initialData, onSubmit, isLoading = false }: Servic
                                     <FormItem>
                                         <FormLabel>Display Order</FormLabel>
                                         <FormControl>
-                                            <Input type="number" {...field} onChange={e => field.onChange(parseInt(e.target.value))} />
+                                            <Input type="number" {...field} onChange={e => field.onChange(e.target.value === '' ? 0 : parseInt(e.target.value))} />
                                         </FormControl>
                                     </FormItem>
                                 )}

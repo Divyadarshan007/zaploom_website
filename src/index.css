@@ -77,6 +77,8 @@
 
 .animate-ticker {
   animation: ticker 30s linear infinite;
+  will-change: transform;
+  text-rendering: optimizeSpeed;
 }
 
 

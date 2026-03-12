@@ -14,7 +14,7 @@ const testimonialSchema = new mongoose.Schema(
         videoUrl: { type: String, default: '' },
         mediaType: { type: String, enum: ['image', 'video', 'none'], default: 'video' },
         isActive: { type: Boolean, default: true },
-        showOnHomePage: { type: Boolean, default: true },
+        isFeatured: { type: Boolean, default: true },
         order: { type: Number, default: 0 },
     },
     { timestamps: true }

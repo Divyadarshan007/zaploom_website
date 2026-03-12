@@ -27,7 +27,7 @@ const products = [
             { question: "Does it support real-time tracking?", answer: "Yes, customers can track their orders from preparation to delivery." }
         ],
         category: "app", androidLink: "https://play.google.com/store/apps/details?id=com.pranspandan&hl=en_IN", iosLink: "https://apps.apple.com/in/app/pranspandan/id6503708836",
-        isActive: true, showOnHomePage: true, order: 1
+        isActive: true, isFeatured: true, order: 1
     },
     {
         slug: "true-bite-app",
@@ -52,7 +52,7 @@ const products = [
         faqs: [{ question: "How accurate is the AI scanner?", answer: "Our AI uses advanced image recognition and a verified database to provide highly accurate nutritional insights." }],
         category: "app", androidLink: "https://play.google.com/store/apps/details?id=com.adityatechnologies.truebite&pcampaignid=web_share", iosLink: "https://apps.apple.com/in/app/truebite/id6749226496",
         isOwnProduct: true,
-        isActive: true, showOnHomePage: true, order: 2
+        isActive: true, isFeatured: true, order: 2
     },
     {
         slug: "bdea-app",
@@ -76,7 +76,7 @@ const products = [
         ],
         faqs: [{ question: "Is the app available nationwide?", answer: "Yes, it's designed for drivers across India to connect and seek assistance." }],
         category: "app", androidLink: "#", iosLink: "#",
-        isActive: true, showOnHomePage: true, order: 3
+        isActive: true, isFeatured: true, order: 3
     },
     {
         slug: "nursing-career-app",
@@ -106,7 +106,7 @@ const products = [
         ],
         faqs: [{ question: "Does it help with certifications?", answer: "Yes, it includes tools to track your professional certifications and career progress." }],
         category: "app", androidLink: "https://play.google.com/store/apps/details?id=com.carerockets", iosLink: "https://apps.apple.com/in/app/care-rockets/id1582939333",
-        isActive: true, showOnHomePage: true, order: 4
+        isActive: true, isFeatured: true, order: 4
     },
     {
         slug: "smart-vending-app",
@@ -136,7 +136,7 @@ const products = [
         ],
         faqs: [{ question: "Can I manage multiple machines?", answer: "Yes, the admin dashboard allows you to monitor an entire fleet of vending machines." }],
         category: "app", androidLink: "https://play.google.com/store/apps/details?id=com.ventrendo.foodspot", iosLink: "https://apps.apple.com/in/app/ventrendo-food-spot/id6747296803",
-        isActive: true, showOnHomePage: true, order: 5
+        isActive: true, isFeatured: true, order: 5
     },
     {
         slug: "cipl-perfume-website",
@@ -154,7 +154,7 @@ const products = [
         techStack: [{ name: "Next.js", icon: "https://cdn.simpleicons.org/nextdotjs" }],
         faqs: [{ question: "Do you support global shipping?", answer: "Yes, our manufacturing and logistics are set up for global delivery." }],
         category: "website", detailLink: "https://ciplperfume.com",
-        isActive: true, showOnHomePage: false, order: 6
+        isActive: true, isFeatured: false, order: 6
     },
     {
         slug: "The-efiling-website",
@@ -177,7 +177,7 @@ const products = [
             { question: "Do you offer support after filing?", answer: "Yes, TheEFiling provides 24/7 customer support to assist you before, during, and after the filing process." }
         ],
         category: "website", detailLink: "https://theefiling.com",
-        isActive: true, showOnHomePage: false, order: 7
+        isActive: true, isFeatured: false, order: 7
     },
     {
         slug: "lumive-website",
@@ -200,15 +200,15 @@ const products = [
             { question: "How do I get started with a treatment?", answer: "You can book a consultation where a board-certified specialist will assess your skin and create a personalized treatment plan tailored to your needs." }
         ],
         category: "website", detailLink: "https://lumive.in",
-        isActive: true, showOnHomePage: false, order: 8
+        isActive: true, isFeatured: false, order: 8
     },
     {
         slug: "the-alps-website",
         title: "The Alps",
         tagline: "Helping Indian Entrepreneurs Close More Deals for 21+ Years",
         description: "Alps Corporate Training Company (ALPS CTC) is a Surat-based sales training and coaching firm with over 21 years of experience. They empower Indian entrepreneurs and sales teams with proven frameworks, hands-on coaching, and actionable strategies to consistently close more deals and scale their business.",
-        image: "/images/productImage/alps.png",
-        alt: "Alps CTC Website",
+        image: "/images/productImage/thealps.png",
+        alt: "The Alps Website",
         features: [
             { title: "Sales Training", desc: "Proven sales training programs designed to help entrepreneurs and teams close more deals consistently.", icon: "TrainingIcon" },
             { title: "1-on-1 Coaching", desc: "Personalized coaching sessions tailored to individual business challenges and sales goals.", icon: "CoachIcon" },
@@ -223,7 +223,7 @@ const products = [
             { question: "How can I enroll in a program?", answer: "You can reach out via the contact form on the website or call +91 94279 66441 to discuss the right program for your team." }
         ],
         category: "website", detailLink: "https://alpsctc.com",
-        isActive: true, showOnHomePage: false, order: 9
+        isActive: true, isFeatured: false, order: 9
     }
 ];
 

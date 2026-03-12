@@ -8,7 +8,7 @@ const createTestimonialSchema = Joi.object({
     videoUrl: Joi.string().allow('').optional(),
     mediaType: Joi.string().valid('image', 'video', 'none').default('video'),
     isActive: Joi.boolean().optional(),
-    showOnHomePage: Joi.boolean().optional(),
+    isFeatured: Joi.boolean().optional(),
     order: Joi.number().optional(),
 });
 
@@ -20,7 +20,7 @@ const updateTestimonialSchema = Joi.object({
     videoUrl: Joi.string().allow('').optional(),
     mediaType: Joi.string().valid('image', 'video', 'none').optional(),
     isActive: Joi.boolean().optional(),
-    showOnHomePage: Joi.boolean().optional(),
+    isFeatured: Joi.boolean().optional(),
     order: Joi.number().optional(),
 }).min(1);
 

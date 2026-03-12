@@ -35,7 +35,7 @@ const testimonialSchema = z.object({
     mediaType: z.enum(['video', 'text', 'image']),
     order: z.number(),
     isActive: z.boolean(),
-    showOnHomePage: z.boolean(),
+    isFeatured: z.boolean(),
 });
 
 type TestimonialFormData = z.infer<typeof testimonialSchema>;
@@ -58,7 +58,7 @@ export function TestimonialForm({ initialData, onSubmit, isLoading = false }: Te
             mediaType: initialData?.mediaType || 'video',
             order: initialData?.order || 0,
             isActive: initialData?.isActive ?? true,
-            showOnHomePage: initialData?.showOnHomePage ?? true,
+            isFeatured: initialData?.isFeatured ?? true,
         },
     });
 
@@ -200,7 +200,7 @@ export function TestimonialForm({ initialData, onSubmit, isLoading = false }: Te
                                     <FormItem>
                                         <FormLabel>Order</FormLabel>
                                         <FormControl>
-                                            <Input type="number" {...field} onChange={e => field.onChange(parseInt(e.target.value))} />
+                                            <Input type="number" {...field} onChange={e => field.onChange(e.target.value === '' ? 0 : parseInt(e.target.value))} />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -226,8 +226,8 @@ export function TestimonialForm({ initialData, onSubmit, isLoading = false }: Te
                                 />
                                 <FormField
                                     control={form.control}
-                                    name="showOnHomePage"
-                                    render={({ field }: { field: ControllerRenderProps<TestimonialFormData, 'showOnHomePage'> }) => (
+                                    name="isFeatured"
+                                    render={({ field }: { field: ControllerRenderProps<TestimonialFormData, 'isFeatured'> }) => (
                                         <FormItem className="flex flex-row items-start space-x-3 space-y-0">
                                             <FormControl>
                                                 <input

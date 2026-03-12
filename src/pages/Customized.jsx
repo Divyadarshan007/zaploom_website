@@ -23,6 +23,13 @@ const Customized = () => {
         fetchProjects();
     }, []);
 
+    const getImageUrl = (url) => {
+        if (!url) return "";
+        if (url.startsWith("http") || url.startsWith("data:") || url.startsWith("/images/")) return url;
+        const baseUrl = import.meta.env.VITE_IMAGE_BASE_URL || "http://localhost:5000";
+        return `${baseUrl}${url.startsWith("/") ? "" : "/"}${url}`;
+    };
+
     const filteredProjects = projects
         .filter((p) => !p.isOwnProduct)
         .filter((p) =>
@@ -110,7 +117,7 @@ const Customized = () => {
                                     <div className="w-full md:w-1/2 group">
                                         <div className="relative rounded-2xl overflow-hidden border border-slate-100 shadow-sm bg-slate-50 transition-all duration-500 group-hover:shadow-xl group-hover:-translate-y-1">
                                             <img
-                                                src={project.image}
+                                                src={getImageUrl(project.image)}
                                                 alt={project.title}
                                                 className="w-full h-auto object-cover transition-transform duration-700 "
                                             />
@@ -152,39 +159,41 @@ const Customized = () => {
                                                     </div>
                                                 </a>
                                             ) : (
-                                                <>
-                                                    <a
-                                                        href={project.androidLink}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        className="inline-flex items-center gap-3 px-4 py-2 bg-black text-white rounded-xl hover:bg-gray-900 transition-all duration-300 cursor-pointer border border-gray-700"
-                                                    >
-                                                        <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 flex-shrink-0" viewBox="0 0 512 512" fill="currentColor">
-                                                            <path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l2.6 1.5 247.1-247v-5.8L47 0zm425 225L371.7 173l-61.8 61.8 61.8 61.8L472 244c12.7-7.3 12.7-19.5 0-19z" fill="#EA4335"/>
-                                                            <path d="M325.3 234.3L104.6 13l-57.6 57.6 278.3 163.7z" fill="#FBBC04"/>
-                                                            <path d="M47 512c13 6.8 29.6 5.8 47-5.8L371.7 305.5l-46.4-46.4L47 512z" fill="#34A853"/>
-                                                            <path d="M472 244l-100.3-57.6-61.8 61.8 61.8 61.8L472 252c6.3-3.6 9.7-8.5 9.7-14s-3.4-10.4-9.7-14z" fill="#4285F4"/>
-                                                        </svg>
-                                                        <div className="flex flex-col leading-tight">
-                                                            <span className="text-[10px] text-gray-300 font-normal">GET IT ON</span>
-                                                            <span className="text-sm font-semibold">Google Play</span>
-                                                        </div>
-                                                    </a>
-                                                    <a
-                                                        href={project.iosLink}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        className="inline-flex items-center gap-3 px-4 py-2 bg-black text-white rounded-xl hover:bg-gray-900 transition-all duration-300 cursor-pointer border border-gray-700"
-                                                    >
-                                                        <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
-                                                            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
-                                                        </svg>
-                                                        <div className="flex flex-col leading-tight">
-                                                            <span className="text-[10px] text-gray-300 font-normal">Download on the</span>
-                                                            <span className="text-sm font-semibold">App Store</span>
-                                                        </div>
-                                                    </a>
-                                                </>
+                                                !["nursing-career-app", "smart-vending-app"].includes(project.slug) && (
+                                                    <>
+                                                        <a
+                                                            href={project.androidLink}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className="inline-flex items-center gap-3 px-4 py-2 bg-black text-white rounded-xl hover:bg-gray-900 transition-all duration-300 cursor-pointer border border-gray-700"
+                                                        >
+                                                            <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 flex-shrink-0" viewBox="0 0 512 512" fill="currentColor">
+                                                                <path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l2.6 1.5 247.1-247v-5.8L47 0zm425 225L371.7 173l-61.8 61.8 61.8 61.8L472 244c12.7-7.3 12.7-19.5 0-19z" fill="#EA4335" />
+                                                                <path d="M325.3 234.3L104.6 13l-57.6 57.6 278.3 163.7z" fill="#FBBC04" />
+                                                                <path d="M47 512c13 6.8 29.6 5.8 47-5.8L371.7 305.5l-46.4-46.4L47 512z" fill="#34A853" />
+                                                                <path d="M472 244l-100.3-57.6-61.8 61.8 61.8 61.8L472 252c6.3-3.6 9.7-8.5 9.7-14s-3.4-10.4-9.7-14z" fill="#4285F4" />
+                                                            </svg>
+                                                            <div className="flex flex-col leading-tight">
+                                                                <span className="text-[10px] text-gray-300 font-normal">GET IT ON</span>
+                                                                <span className="text-sm font-semibold">Google Play</span>
+                                                            </div>
+                                                        </a>
+                                                        <a
+                                                            href={project.iosLink}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className="inline-flex items-center gap-3 px-4 py-2 bg-black text-white rounded-xl hover:bg-gray-900 transition-all duration-300 cursor-pointer border border-gray-700"
+                                                        >
+                                                            <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                                                                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                                                            </svg>
+                                                            <div className="flex flex-col leading-tight">
+                                                                <span className="text-[10px] text-gray-300 font-normal">Download on the</span>
+                                                                <span className="text-sm font-semibold">App Store</span>
+                                                            </div>
+                                                        </a>
+                                                    </>
+                                                )
                                             )}
                                         </div>
                                     </div>

@@ -58,7 +58,7 @@ const Feature = () => {
                         Features
                     </span>
                     <h2 className="text-3xl md:text-4xl font-medium text-slate-900 text-center max-w-2xl leading-tight font-clash-display">
-                        {settings?.features?.heading || "Streamline Business with our Flexible Options"}
+                        {settings?.features?.heading || "End-to-End Technology Solutions for Your Growing Business"}
                     </h2>
                 </div>
 

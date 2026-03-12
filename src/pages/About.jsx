@@ -124,21 +124,6 @@ const About = () => {
                                     <h3 className="text-xl font-bold text-slate-900 mb-3 font-clash-display">Our Vision</h3>
                                     <p className="text-slate-600 text-sm leading-relaxed">{settings?.vision || "To be the most trusted technology partner for brands worldwide, setting new standards."}</p>
                                 </div>
-                                <div className="p-6 rounded-3xl bg-slate-50 border border-slate-100 hover:shadow-lg transition-all duration-300 sm:col-span-2">
-                                    <div className="flex items-center gap-4 mb-4">
-                                        <div className="w-12 h-12 rounded-2xl bg-purple-50 flex items-center justify-center">
-                                            <svg className="w-6 h-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                                            </svg>
-                                        </div>
-                                        <h3 className="text-xl font-bold text-slate-900 font-clash-display">Our Core Values</h3>
-                                    </div>
-                                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                                        <div className="bg-white p-4 rounded-2xl border border-slate-100 italic text-slate-600 text-sm">"Innovation in every byte"</div>
-                                        <div className="bg-white p-4 rounded-2xl border border-slate-100 italic text-slate-600 text-sm">"Integrity and Transparency"</div>
-                                        <div className="bg-white p-4 rounded-2xl border border-slate-100 italic text-slate-600 text-sm">"Customer Success Priority"</div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
 

@@ -117,7 +117,7 @@ export function TeamMemberForm({ initialData, onSubmit, isLoading = false }: Tea
                                     <FormItem>
                                         <FormLabel>Display Order</FormLabel>
                                         <FormControl>
-                                            <Input type="number" {...field} onChange={e => field.onChange(parseInt(e.target.value))} />
+                                            <Input type="number" {...field} onChange={e => field.onChange(e.target.value === '' ? 0 : parseInt(e.target.value))} />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>

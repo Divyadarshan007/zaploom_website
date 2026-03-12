@@ -32,7 +32,7 @@ const productSchema = z.object({
     alt: z.string().optional(),
     order: z.number(),
     isActive: z.boolean(),
-    showOnHomePage: z.boolean(),
+    isFeatured: z.boolean(),
     isOwnProduct: z.boolean(),
     features: z.array(z.object({
         title: z.string().min(1, 'Feature title is required'),
@@ -72,7 +72,7 @@ export function ProductForm({ initialData, onSubmit, isLoading = false }: Produc
             alt: initialData?.alt || '',
             order: initialData?.order || 0,
             isActive: initialData?.isActive ?? true,
-            showOnHomePage: initialData?.showOnHomePage ?? true,
+            isFeatured: initialData?.isFeatured ?? true,
             isOwnProduct: initialData?.isOwnProduct ?? false,
             features: initialData?.features || [],
             techStack: initialData?.techStack || [],
@@ -284,7 +284,7 @@ export function ProductForm({ initialData, onSubmit, isLoading = false }: Produc
                                     <FormItem>
                                         <FormLabel>Display Order</FormLabel>
                                         <FormControl>
-                                            <Input type="number" {...field} onChange={e => field.onChange(parseInt(e.target.value))} />
+                                            <Input type="number" {...field} onChange={e => field.onChange(e.target.value === '' ? 0 : parseInt(e.target.value))} />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -312,8 +312,8 @@ export function ProductForm({ initialData, onSubmit, isLoading = false }: Produc
                                 />
                                 <FormField
                                     control={form.control}
-                                    name="showOnHomePage"
-                                    render={({ field }: { field: ControllerRenderProps<ProductFormData, 'showOnHomePage'> }) => (
+                                    name="isFeatured"
+                                    render={({ field }: { field: ControllerRenderProps<ProductFormData, 'isFeatured'> }) => (
                                         <FormItem className="flex flex-row items-start space-x-3 space-y-0">
                                             <FormControl>
                                                 <input

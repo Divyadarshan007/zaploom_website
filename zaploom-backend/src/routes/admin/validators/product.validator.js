@@ -27,7 +27,7 @@ const createProductSchema = Joi.object({
     techStack: Joi.array().items(techStackSchema).optional(),
     faqs: Joi.array().items(faqSchema).optional(),
     isActive: Joi.boolean().optional(),
-    showOnHomePage: Joi.boolean().optional(),
+    isFeatured: Joi.boolean().optional(),
     order: Joi.number().optional(),
 });
 
@@ -42,7 +42,7 @@ const updateProductSchema = Joi.object({
     techStack: Joi.array().items(techStackSchema).optional(),
     faqs: Joi.array().items(faqSchema).optional(),
     isActive: Joi.boolean().optional(),
-    showOnHomePage: Joi.boolean().optional(),
+    isFeatured: Joi.boolean().optional(),
     order: Joi.number().optional(),
 }).min(1);
 
